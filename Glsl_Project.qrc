@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Glsl_Project"/>
+    <qresource prefix="/img">
+        <file>img/background.png</file>
+        <file>img/cursor.png</file>
+    </qresource>
+</RCC>
