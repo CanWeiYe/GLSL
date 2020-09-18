@@ -22,44 +22,44 @@ public:
 	 color(float r,float g,float b):r(r),g(g),b(b){}
 };
 
-color getColor(int k) {						// »ñÈ¡ÑÕÉ«º¯Êý
+color getColor(int k) {						// èŽ·å–é¢œè‰²å‡½æ•°
 	if (k == 0)
-		return color(0, 0, 0);				// ºÚÉ«
+		return color(0, 0, 0);				// é»‘è‰²
 	else if (k == 1)
-		return color(0, 0, 128);			// À¶É«
+		return color(0, 0, 128);			// è“è‰²
 	else if (k == 2)
-		return color(0, 128, 0);			// ÂÌÉ«
+		return color(0, 128, 0);			// ç»¿è‰²
 	else if (k == 3)
-		return color(0, 128, 128);			// ÇàÉ«
+		return color(0, 128, 128);			// é’è‰²
 	else if (k == 4)
-		return color(128, 0, 0);			// ºìÉ«
+		return color(128, 0, 0);			// çº¢è‰²
 	else if (k == 5)
-		return color(128, 0, 128);			// Ñóºì
+		return color(128, 0, 128);			// æ´‹çº¢
 	else if (k == 6)
-		return color(128, 128, 0);			// »ÆÉ«
+		return color(128, 128, 0);			// é»„è‰²
 	else if (k == 7)
-		return color(192, 192, 192);		// °×É«
+		return color(192, 192, 192);		// ç™½è‰²
 	else if (k == 8)
-		return color(128, 128, 128);		// »ÒÉ«
+		return color(128, 128, 128);		// ç°è‰²
 	else if (k == 9)
-		return color(0, 0, 255);		// ÁÁÀ¶É«
+		return color(0, 0, 255);		// äº®è“è‰²
 	else if (k == 10)
-		return color(0, 255, 0);		// Ç³ÂÌÉ«
+		return color(0, 255, 0);		// æµ…ç»¿è‰²
 	else if (k == 11)
-		return color(0, 255, 255);		// ÁÁÇàÉ«
+		return color(0, 255, 255);		// äº®é’è‰²
 	else if (k == 12)
-		return color(255, 0, 0);			// ÁÁºìÉ«
+		return color(255, 0, 0);			// äº®çº¢è‰²
 	else if (k == 13)
-		return color(255, 0, 255);		// ÁÁÑóºìÉ«
+		return color(255, 0, 255);		// äº®æ´‹çº¢è‰²
 	else if (k == 14)
-		return color(255, 255, 0);		// ÁÁ»ÆÉ«
+		return color(255, 255, 0);		// äº®é»„è‰²
 	else if (k == 15)
-		return color(255, 255, 255);		// ÁÁ°×É«
+		return color(255, 255, 255);		// äº®ç™½è‰²
 }
 
 color drawPoint(int style,float h,int color[]) {
 
-	if (style == 0 || style == 1) {					// Í¼°¸1-2
+	if (style == 0 || style == 1) {					// å›¾æ¡ˆ1-2
 		if (h > -9 && h <= -5)return getColor(color[0]);
 		else if (h > -5 && h <= -4)return getColor(color[1]);
 		else if (h > -4 && h <= -3)return getColor(color[2]);
@@ -82,7 +82,7 @@ color drawPoint(int style,float h,int color[]) {
 		else if (h > 9 && h <= 13)return getColor(color[19]);
 	}
 
-	else if (style == 2) {				// Í¼°¸3
+	else if (style == 2) {				// å›¾æ¡ˆ3
 		if (h > -9 && h <= -5)return getColor(color[0]);
 		else if (h > -5 && h <= -4)return getColor(color[1]);
 		else if (h > -4 && h <= -3)return getColor(color[2]);
@@ -398,7 +398,7 @@ color drawPoint(int style,float h,int color[]) {
 }
 
 float algo(float h,int q, float x, float y, int i,int style) {
-	if (style == 0)							// Í¼°¸1
+	if (style == 0)							// å›¾æ¡ˆ1
 		return h + cos(x*cos(2 * pi*i / q) + y * sin(2 * pi*i / q));
 	else if (style == 1) {
 		float t = cos(x*cos(2 * pi*i / q) + y * sin(2 * pi*i / q));
@@ -444,7 +444,7 @@ void CPUdraw(int q,int w,int l,int X0,int Y0,int style,int color[]) {
 			float x_origin = (float)x / 300;											// [-1,1]
 			float y_origin = (float)y / 300;											// [-1,1]
 			float x0 = x_origin, y0 = y_origin;
-			x0 = x0 / 2 + 0.5; y0 = 0.5 - y0 / 2;								// ×ª»»×ø±êÏµ
+			x0 = x0 / 2 + 0.5; y0 = 0.5 - y0 / 2;								// è½¬æ¢åæ ‡ç³»
 			x0 *= l; y0 *= l;													// [0,1]->[0,L]
 			float s = w;
 			if (s > 65)s = 66;
@@ -457,7 +457,7 @@ void CPUdraw(int q,int w,int l,int X0,int Y0,int style,int color[]) {
 			float h = 0;
 
 			for (int i = 1; i <= q; i++)
-				h = algo(h,q, x_current, y_current, i,style);	// µü´úËã·¨º¯Êý
+				h = algo(h,q, x_current, y_current, i,style);	// è¿­ä»£ç®—æ³•å‡½æ•°
 
 			struct color outColor = drawPoint(style,h,color);
 			glColor3f(outColor.r, outColor.g, outColor.b);
@@ -493,7 +493,7 @@ int glWindow::getColorCount(int style) {
 	}
 }
 
-void glWindow::initColor() {				// ³õÊ¼»¯Êý×é
+void glWindow::initColor() {				// åˆå§‹åŒ–æ•°ç»„
 	if (style == 0) {
 		int t[20] = { 10,2,7,4,3,9,12,13,8,10,13,5,12,1,11,15,8,14,9,15 };
 		for (int i = 0; i < 20; i++)
@@ -561,7 +561,7 @@ glWindow::glWindow(int q, int w, int l, int X0, int Y0,bool isColorRandom,int st
 	count = getColorCount(style);
 	initColor();
 	if (isColorRandom)
-		upsetColor();								// ´òÂÒÊý×é
+		upsetColor();								// æ‰“ä¹±æ•°ç»„
 	this->setParent(Glsl_Project::getInstance());
 	this->setGeometry(LEFT_BLOCK_WIDTH,0,l,l);
 }
@@ -581,17 +581,17 @@ LARGE_INTEGER qpc2;
 void glWindow::initializeGL() {
 
 
-	QueryPerformanceCounter(&qpc1);//ÊÇ·µ»Ø¶¨Ê±Æ÷µ±Ç°¼ÆÊýÖµ¡£
+	QueryPerformanceCounter(&qpc1);//æ˜¯è¿”å›žå®šæ—¶å™¨å½“å‰è®¡æ•°å€¼ã€‚
 
-	QueryPerformanceFrequency(&qpf);//ÊÇ·µ»Ø¶¨Ê±Æ÷µÄÆµÂÊ¡£
+	QueryPerformanceFrequency(&qpf);//æ˜¯è¿”å›žå®šæ—¶å™¨çš„é¢‘çŽ‡ã€‚
 
-	//×ÅÉ«Æ÷²¿·Ö
+	//ç€è‰²å™¨éƒ¨åˆ†
 	core = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
 	ourShader = new Shader("vert.vert", "frag.frag");
 
 	ID = ourShader->shaderProgram.programId();
 
-	//VAO£¬VBOÊý¾Ý²¿·Ö
+	//VAOï¼ŒVBOæ•°æ®éƒ¨åˆ†
 	GLfloat vertices[] = {
 		1.0f, 1.0f, 0.0f  ,  -1.0f, 1.0f, 0.0f,  
 	   -1.0f, -1.0f, 0.0f ,  -1.0f, -1.0f, 0.0f,  
@@ -599,7 +599,7 @@ void glWindow::initializeGL() {
 	};
 
 
-	core->glGenVertexArrays(1, &VAO);//Á½¸ö²ÎÊý£¬µÚÒ»¸öÎªÐèÒª´´½¨µÄ»º´æÊýÁ¿¡£µÚ¶þ¸öÎªÓÃÓÚ´æ´¢µ¥Ò»ID»ò¶à¸öIDµÄGLuint±äÁ¿»òÊý×éµÄµØÖ·
+	core->glGenVertexArrays(1, &VAO);//ä¸¤ä¸ªå‚æ•°ï¼Œç¬¬ä¸€ä¸ªä¸ºéœ€è¦åˆ›å»ºçš„ç¼“å­˜æ•°é‡ã€‚ç¬¬äºŒä¸ªä¸ºç”¨äºŽå­˜å‚¨å•ä¸€IDæˆ–å¤šä¸ªIDçš„GLuintå˜é‡æˆ–æ•°ç»„çš„åœ°å€
 	core->glGenBuffers(1, &VBO);
 	core->glBindVertexArray(VAO);
 	core->glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -617,8 +617,8 @@ void glWindow::resizeGL(int w, int h) {
 }
 void glWindow::paintGL() {
 
-	/*ourShader->use();
-	core->glUniform1i(core->glGetUniformLocation(ID,"q"),this->q);			//	ÏòGPU´«²Î
+	ourShader->use();
+	core->glUniform1i(core->glGetUniformLocation(ID,"q"),this->q);			//	å‘GPUä¼ å‚
 	core->glUniform1i(core->glGetUniformLocation(ID, "w"), this->w);
 	core->glUniform1i(core->glGetUniformLocation(ID, "l"), this->l);
 	core->glUniform1i(core->glGetUniformLocation(ID, "X0"), this->X0);
@@ -626,10 +626,10 @@ void glWindow::paintGL() {
 	core->glUniform1iv(core->glGetUniformLocation(ID, "color"),count, this->color);
 	core->glUniform1i(core->glGetUniformLocation(ID, "style"), this->style);
 	core->glBindVertexArray(VAO);
-	core->glDrawArrays(GL_TRIANGLES, 0, 6);*/
-	glBegin(GL_POINTS);
+	core->glDrawArrays(GL_TRIANGLES, 0, 6);
+	/*glBegin(GL_POINTS);
 	CPUdraw(q,w,l,X0,Y0,style,color);
-	glEnd();
+	glEnd();*/
 	QueryPerformanceCounter(&qpc2);
 
 	LONGLONG ll = qpc2.QuadPart - qpc1.QuadPart;
