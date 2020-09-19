@@ -10,6 +10,7 @@
 
 #define LEFT_BLOCK_WIDTH 231
 #define pi 3.14159265
+#define GRIAN_SIZE 550
 int count;
 GLuint VBO, VAO;
 
@@ -438,11 +439,27 @@ float algo(float h,int q, float x, float y, int i,int style) {
 	}
 }
 
+void glWindow::GPUdraw() {
+	ourShader->use();
+	core->glUniform1i(core->glGetUniformLocation(ID, "q"), this->q);			//	向GPU传参
+	core->glUniform1i(core->glGetUniformLocation(ID, "w"), this->w);
+	core->glUniform1i(core->glGetUniformLocation(ID, "l"), this->l);
+	core->glUniform1i(core->glGetUniformLocation(ID, "X0"), this->X0);
+	core->glUniform1i(core->glGetUniformLocation(ID, "Y0"), this->Y0);
+	core->glUniform1iv(core->glGetUniformLocation(ID, "color"), count, this->color);
+	core->glUniform1i(core->glGetUniformLocation(ID, "style"), this->style);
+	core->glBindVertexArray(VAO);
+	core->glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
 void CPUdraw(int q,int w,int l,int X0,int Y0,int style,int color[]) {
-	for (GLint x = -300; x <= 300; x++) {
-		for (GLint y = -300; y <= 300; y++) {
-			float x_origin = (float)x / 300;											// [-1,1]
-			float y_origin = (float)y / 300;											// [-1,1]
+
+	glBegin(GL_POINTS);
+
+	for (GLint x = - GRIAN_SIZE; x <= GRIAN_SIZE; x++) {
+		for (GLint y = - GRIAN_SIZE; y <= GRIAN_SIZE; y++) {
+			float x_origin = (float)x / GRIAN_SIZE;											// [-1,1]
+			float y_origin = (float)y / GRIAN_SIZE;											// [-1,1]
 			float x0 = x_origin, y0 = y_origin;
 			x0 = x0 / 2 + 0.5; y0 = 0.5 - y0 / 2;								// 转换坐标系
 			x0 *= l; y0 *= l;													// [0,1]->[0,L]
@@ -464,6 +481,8 @@ void CPUdraw(int q,int w,int l,int X0,int Y0,int style,int color[]) {
 			glVertex2f(x_origin, y_origin);
 		}
 	}
+
+	glEnd();
 }
 
 int glWindow::getColorCount(int style) {
@@ -617,19 +636,10 @@ void glWindow::resizeGL(int w, int h) {
 }
 void glWindow::paintGL() {
 
-	ourShader->use();
-	core->glUniform1i(core->glGetUniformLocation(ID,"q"),this->q);			//	向GPU传参
-	core->glUniform1i(core->glGetUniformLocation(ID, "w"), this->w);
-	core->glUniform1i(core->glGetUniformLocation(ID, "l"), this->l);
-	core->glUniform1i(core->glGetUniformLocation(ID, "X0"), this->X0);
-	core->glUniform1i(core->glGetUniformLocation(ID, "Y0"), this->Y0);
-	core->glUniform1iv(core->glGetUniformLocation(ID, "color"),count, this->color);
-	core->glUniform1i(core->glGetUniformLocation(ID, "style"), this->style);
-	core->glBindVertexArray(VAO);
-	core->glDrawArrays(GL_TRIANGLES, 0, 6);
-	/*glBegin(GL_POINTS);
-	CPUdraw(q,w,l,X0,Y0,style,color);
-	glEnd();*/
+	GPUdraw();
+
+	//CPUdraw(q,w,l,X0,Y0,style,color);
+
 	QueryPerformanceCounter(&qpc2);
 
 	LONGLONG ll = qpc2.QuadPart - qpc1.QuadPart;
