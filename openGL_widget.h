@@ -13,6 +13,7 @@ public:
 	static int getColorCount(int style);
     void initColor();
 	void upsetColor();
+	void GPUdraw();
 	GLuint a;
 	~glWindow();
 protected:
@@ -24,12 +25,12 @@ private:
 	Shader *ourShader;
 	QOpenGLFunctions_3_3_Core *core;
 	GLuint ID;
-	int q;	// 迭代次数
-	int w;	// 图像密度
-	int l;	// 图像大小
-	int X0;	// 中心X坐标
-	int Y0;	// 中心Y坐标
-	bool isColorRandom;	// 颜色是否随机
-	int style;	// 图像样式
-	int color[60];	// 颜色数组
+	int q;	// 杩唬娆℃暟
+	int w;	// 鍥惧儚瀵嗗害
+	int l;	// 鍥惧儚澶у皬
+	int X0;	// 涓績X鍧愭爣
+	int Y0;	// 涓績Y鍧愭爣
+	bool isColorRandom;	// 棰滆壊鏄惁闅忔満
+	int style;	// 鍥惧儚鏍峰紡
+	int color[60];	// 棰滆壊鏁扮粍
 };
